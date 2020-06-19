@@ -52,6 +52,8 @@ void Actions::newFile(){
 
     QRectF sceneRect = scene->itemsBoundingRect();
     scene->setSceneRect(sceneRect);
+    root->ui->graphicsView->setFixedSize(newDialog->ui->widthSpinBox->value()+11,newDialog->ui->heightSpinBox->value()+11);
+//    root->ui->graphicsView->fitInView(sceneRect,Qt::KeepAspectRatio);
 
 };
 void Actions::saveFile(){
