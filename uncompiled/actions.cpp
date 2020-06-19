@@ -92,8 +92,8 @@ void Actions::saveAs(){
 };
 void Actions::openFile(){
 
-    if (!CloseFile())
-        return;
+//    if (!CloseFile())
+//        return;
 
     QString fileName = QFileDialog::getOpenFileName(root,"Open file","","Images (*.jpg *.jpeg *.png)");
 
@@ -103,10 +103,13 @@ void Actions::openFile(){
         return;
 
     root->setFilename(fileName);
-    delete root->getScene();
-    Scene* scene = new Scene(root);
-    root->setScene(scene);
-    root->ui->graphicsView->setScene(root->getScene());
+    if (root->getScene() == 0){
+//    delete root->getScene();
+        Scene* scene = new Scene(root);
+        root->setScene(scene);
+        root->ui->graphicsView->setScene(root->getScene());
+    }
+
     QPixmap imagepixmap(fileName);
 
     root->getScene()->addPixmap(imagepixmap.scaledToWidth(root->ui->graphicsView->width(), Qt::SmoothTransformation));
